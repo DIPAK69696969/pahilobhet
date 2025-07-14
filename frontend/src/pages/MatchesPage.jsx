@@ -18,7 +18,7 @@ const MatchesPage = () => {
     try {
       setLoading(true);
       const token = localStorage.getItem('authToken'); // Assuming you store auth token here
-      const response = await axios.get('/api/matching/profiles', {
+      const response = await axios.get('http://localhost:5000/api/matching/profiles', {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -43,7 +43,7 @@ const MatchesPage = () => {
 
     try {
       const token = localStorage.getItem('authToken');
-      const response = await axios.post('/api/matching/like', {
+      const response = await axios.post('http://localhost:5000/api/matching/like', {
         targetUserId: currentProfile.id,
         action: action // 'like' or 'pass'
       }, {

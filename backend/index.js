@@ -14,7 +14,10 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Middleware to verify JWT token (you'll need to implement this based on your auth system)
+const jwt = require('jsonwebtoken');
+const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-this-in-production';
+
+// Middleware to verify JWT token
 const authenticateToken = (req, res, next) => {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
@@ -23,17 +26,13 @@ const authenticateToken = (req, res, next) => {
     return res.status(401).json({ success: false, message: 'Access token required' });
   }
 
-  // TODO: Implement JWT verification here
-  // For now, assuming token contains user info
-  // jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-  //   if (err) return res.status(403).json({ success: false, message: 'Invalid token' });
-  //   req.user = user;
-  //   next();
-  // });
-  
-  // Temporary placeholder - replace with actual JWT verification
-  req.user = { id: 1 }; // Mock user for development
-  next();
+  jwt.verify(token, JWT_SECRET, (err, user) => {
+    if (err) {
+      return res.status(403).json({ success: false, message: 'Invalid token' });
+    }
+    req.user = user;
+    next();
+  });
 };
 
 // Routes
