@@ -2,33 +2,105 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@100;200;300;400;500;600;700;800;900&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
-
+/* Custom Nepali-inspired colors and gradients */
 :root {
-  font-family: 'Inter', 'Noto Sans Devanagari', sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-  color-scheme: light;
+  --nepal-crimson: #DC143C;
+  --nepal-blue: #003893;
+  --nepal-gold: #FFD700;
+  --warm-gradient: linear-gradient(135deg, #DC143C 0%, #FF6B6B 100%);
+  --cool-gradient: linear-gradient(135deg, #003893 0%, #4FC3F7 100%);
 }
 
+/* Custom font family */
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  font-family: 'Inter', 'Noto Sans Devanagari', sans-serif;
 }
 
-#root {
-  width: 100%;
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
 }
 
-@layer components {
-  .btn-primary {
-    @apply bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white font-semibold py-3 px-6 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1;
-  }
-  
-  .btn-secondary {
-    @apply bg-white text-red-600 border-2 border-red-600 hover:bg-red-600 hover:text-white font-semibold py-3 px-6 rounded-full transition-all duration-300;
-  }
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #DC143C;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #B91C3C;
+}
+
+/* Custom animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes heartBeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.4s ease-out;
+}
+
+.animate-heart-beat {
+  animation: heartBeat 1.5s ease-in-out infinite;
+}
+
+/* Custom components */
+.btn-primary {
+  @apply bg-gradient-to-r from-red-600 to-red-500 text-white px-6 py-3 rounded-lg font-semibold hover:from-red-700 hover:to-red-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5;
+}
+
+.btn-secondary {
+  @apply bg-white text-red-600 border-2 border-red-600 px-6 py-3 rounded-lg font-semibold hover:bg-red-600 hover:text-white transition-all duration-300;
+}
+
+.card {
+  @apply bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300;
+}
+
+.glass-effect {
+  @apply bg-white/10 backdrop-blur-md border border-white/20;
+}
+
+/* Chat bubble styles */
+.chat-bubble-sent {
+  @apply bg-red-600 text-white rounded-l-2xl rounded-tr-2xl rounded-br-md ml-auto;
+}
+
+.chat-bubble-received {
+  @apply bg-gray-100 text-gray-800 rounded-r-2xl rounded-tl-2xl rounded-bl-md mr-auto;
+}
+
+/* Profile card hover effects */
+.profile-card:hover {
+  transform: translateY(-5px) scale(1.02);
+}
+
+/* Festival decoration */
+.festival-decoration {
+  background: linear-gradient(45deg, #FFD700, #FFA500, #FF6347, #DC143C);
+  background-size: 400% 400%;
+  animation: festivalGlow 3s ease infinite;
+}
+
+@keyframes festivalGlow {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
 }
